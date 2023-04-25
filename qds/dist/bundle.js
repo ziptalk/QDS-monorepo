@@ -1,5 +1,6 @@
-import * as React$1 from 'react';
-import { useLayoutEffect, forwardRef, useContext, createElement, createContext, Fragment, useRef, useState, useEffect } from 'react';
+import * as React from 'react';
+import { useLayoutEffect, forwardRef, useContext, createElement, Fragment as Fragment$1, createContext, useRef, useState, useEffect } from 'react';
+import { Fragment as Fragment$2, jsx as jsx$1, jsxs as jsxs$1 } from 'react/jsx-runtime';
 import { createPortal } from 'react-dom';
 
 function _typeof(obj) {
@@ -11,21 +12,17 @@ function _typeof(obj) {
     return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   }, _typeof(obj);
 }
-function _extends() {
-  _extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends.apply(this, arguments);
-}
 
+var _assign = function __assign() {
+  _assign = Object.assign || function __assign(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return _assign.apply(this, arguments);
+};
 function __rest(s, e) {
   var t = {};
   for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
@@ -2068,7 +2065,7 @@ var isBrowser$2 = typeof document !== 'undefined';
 var syncFallback = function syncFallback(create) {
   return create();
 };
-var useInsertionEffect = React$1['useInsertion' + 'Effect'] ? React$1['useInsertion' + 'Effect'] : false;
+var useInsertionEffect = React['useInsertion' + 'Effect'] ? React['useInsertion' + 'Effect'] : false;
 var useInsertionEffectAlwaysWithSyncFallback = !isBrowser$2 ? syncFallback : useInsertionEffect || syncFallback;
 var useInsertionEffectWithLayoutFallback = useInsertionEffect || useLayoutEffect;
 
@@ -2122,8 +2119,66 @@ var ThemeContext = /* #__PURE__ */createContext({});
 if (process.env.NODE_ENV !== 'production') {
   ThemeContext.displayName = 'EmotionThemeContext';
 }
+var getLastPart = function getLastPart(functionName) {
+  // The match may be something like 'Object.createEmotionProps' or
+  // 'Loader.prototype.render'
+  var parts = functionName.split('.');
+  return parts[parts.length - 1];
+};
+var getFunctionNameFromStackTraceLine = function getFunctionNameFromStackTraceLine(line) {
+  // V8
+  var match = /^\s+at\s+([A-Za-z0-9$.]+)\s/.exec(line);
+  if (match) return getLastPart(match[1]); // Safari / Firefox
+
+  match = /^([A-Za-z0-9$.]+)@/.exec(line);
+  if (match) return getLastPart(match[1]);
+  return undefined;
+};
+var internalReactFunctionNames = /* #__PURE__ */new Set(['renderWithHooks', 'processChild', 'finishClassComponent', 'renderToString']); // These identifiers come from error stacks, so they have to be valid JS
+// identifiers, thus we only need to replace what is a valid character for JS,
+// but not for CSS.
+
+var sanitizeIdentifier = function sanitizeIdentifier(identifier) {
+  return identifier.replace(/\$/g, '-');
+};
+var getLabelFromStackTrace = function getLabelFromStackTrace(stackTrace) {
+  if (!stackTrace) return undefined;
+  var lines = stackTrace.split('\n');
+  for (var i = 0; i < lines.length; i++) {
+    var functionName = getFunctionNameFromStackTraceLine(lines[i]); // The first line of V8 stack traces is just "Error"
+
+    if (!functionName) continue; // If we reach one of these, we have gone too far and should quit
+
+    if (internalReactFunctionNames.has(functionName)) break; // The component name is the first function in the stack that starts with an
+    // uppercase letter
+
+    if (/^[A-Z]/.test(functionName)) return sanitizeIdentifier(functionName);
+  }
+  return undefined;
+};
 var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
 var labelPropName = '__EMOTION_LABEL_PLEASE_DO_NOT_USE__';
+var createEmotionProps = function createEmotionProps(type, props) {
+  if (process.env.NODE_ENV !== 'production' && typeof props.css === 'string' &&
+  // check if there is a css declaration
+  props.css.indexOf(':') !== -1) {
+    throw new Error("Strings are not allowed as css prop values, please wrap it in a css template literal from '@emotion/react' like this: css`" + props.css + "`");
+  }
+  var newProps = {};
+  for (var key in props) {
+    if (hasOwnProperty.call(props, key)) {
+      newProps[key] = props[key];
+    }
+  }
+  newProps[typePropName] = type; // For performance, only call getLabelFromStackTrace in development and when
+  // the label hasn't already been computed
+
+  if (process.env.NODE_ENV !== 'production' && !!props.css && (_typeof(props.css) !== 'object' || typeof props.css.name !== 'string' || props.css.name.indexOf('-') === -1)) {
+    var label = getLabelFromStackTrace(new Error().stack);
+    if (label) newProps[labelPropName] = label;
+  }
+  return newProps;
+};
 var Insertion$1 = function Insertion(_ref) {
   var cache = _ref.cache,
     serialized = _ref.serialized,
@@ -2178,7 +2233,7 @@ var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
   }
   newProps.ref = ref;
   newProps.className = className;
-  return /*#__PURE__*/createElement(Fragment, null, /*#__PURE__*/createElement(Insertion$1, {
+  return /*#__PURE__*/createElement(Fragment$1, null, /*#__PURE__*/createElement(Insertion$1, {
     cache: cache,
     serialized: serialized,
     isStringTag: typeof WrappedComponent === 'string'
@@ -2186,6 +2241,20 @@ var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
 });
 if (process.env.NODE_ENV !== 'production') {
   Emotion.displayName = 'EmotionCssPropInternal';
+}
+
+var Fragment = Fragment$2;
+function jsx(type, props, key) {
+  if (!hasOwnProperty.call(props, 'css')) {
+    return jsx$1(type, props, key);
+  }
+  return jsx$1(Emotion, createEmotionProps(type, props), key);
+}
+function jsxs(type, props, key) {
+  if (!hasOwnProperty.call(props, 'css')) {
+    return jsxs$1(type, props, key);
+  }
+  return jsxs$1(Emotion, createEmotionProps(type, props), key);
 }
 
 var pkg = {
@@ -2506,7 +2575,7 @@ var ClassNames = /* #__PURE__ */withEmotionCache(function (props, cache) {
   };
   var ele = props.children(content);
   hasRendered = true;
-  return /*#__PURE__*/createElement(Fragment, null, /*#__PURE__*/createElement(Insertion, {
+  return /*#__PURE__*/createElement(Fragment$1, null, /*#__PURE__*/createElement(Insertion, {
     cache: cache,
     serializedArr: serializedArr
   }), ele);
@@ -2539,9 +2608,11 @@ if (process.env.NODE_ENV !== 'production') {
 var FixedBackground = function FixedBackground(_a) {
   var children = _a.children,
     props = __rest(_a, ["children"]);
-  return /*#__PURE__*/React.createElement("div", _extends({
+  return jsx("div", _assign({
     css: backgroundStyle
-  }, props), children);
+  }, props, {
+    children: children
+  }));
 };
 var backgroundStyle = css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: 100vw;\n  height: 100vh;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  background-color: #0000005a;\n"], ["\n  width: 100vw;\n  height: 100vh;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  background-color: #0000005a;\n"])));
 var modalBackgroundStyle = css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"])));
@@ -2594,7 +2665,7 @@ var useOutsideClose = function useOutsideClose(ref, handler) {
 
 var Xbutton = function Xbutton(_a) {
   var props = __rest(_a, []);
-  return /*#__PURE__*/React.createElement("button", _extends({
+  return jsx("button", _assign({
     css: buttonStyle
   }, props));
 };
@@ -2619,20 +2690,28 @@ var Modal = function Modal(_a) {
     props = __rest(_a, ["children", "isOpen", "onClose", "xButton", "overlayStyle"]);
   var ref = useRef(null);
   useOutsideClose(ref, onClose);
-  return isOpen ? /*#__PURE__*/React.createElement(ReactPortal, {
+  return isOpen ? jsx(ReactPortal, _assign({
     wrapperId: "react-portal-modal-container"
-  }, /*#__PURE__*/React.createElement(FixedBackground, {
-    css: css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "], ["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "])), modalBackgroundStyle, modalBackgroundAnimation, overlayStyle ? overlayStyle : "")
-  }, /*#__PURE__*/React.createElement("div", _extends({
-    css: modalBox,
-    ref: ref
-  }, props), xButton ? /*#__PURE__*/React.createElement("span", {
-    css: buttonWrapper
-  }, /*#__PURE__*/React.createElement(Xbutton, {
-    onClick: function onClick() {
-      return onClose();
-    }
-  })) : /*#__PURE__*/React.createElement(React.Fragment, null), children))) : /*#__PURE__*/React.createElement(React.Fragment, null);
+  }, {
+    children: jsx(FixedBackground, _assign({
+      css: css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "], ["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "])), modalBackgroundStyle, modalBackgroundAnimation, overlayStyle ? overlayStyle : "")
+    }, {
+      children: jsxs("div", _assign({
+        css: modalBox,
+        ref: ref
+      }, props, {
+        children: [xButton ? jsx("span", _assign({
+          css: buttonWrapper
+        }, {
+          children: jsx(Xbutton, {
+            onClick: function onClick() {
+              return onClose();
+            }
+          })
+        })) : jsx(Fragment, {}), children]
+      }))
+    }))
+  })) : jsx(Fragment, {});
 };
 var modalAnimation = keyframes(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    from{\n        transform:scale(0);\n    }\n    to{\n        transform:scale(1);\n    }\n"], ["\n    from{\n        transform:scale(0);\n    }\n    to{\n        transform:scale(1);\n    }\n"])));
 var modalBox = css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  border-radius: 10px;\n  background-color: white;\n  animation: ", " 0.2s ease-in-out;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,\n    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;\n  position: relative;\n"], ["\n  border-radius: 10px;\n  background-color: white;\n  animation: ", " 0.2s ease-in-out;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,\n    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;\n  position: relative;\n"])), modalAnimation);

@@ -1,4 +1,7 @@
-import { css, keyframes } from "@emotion/react";
+/** @jsxImportSource @emotion/react */
+
+import React from "react";
+import { css, keyframes, jsx } from "@emotion/react";
 
 interface Props extends React.ComponentProps<"div"> {
   children: React.ReactNode;

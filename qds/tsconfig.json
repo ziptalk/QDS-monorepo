@@ -3,12 +3,11 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "esnext"],
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "module": "es6",
     "moduleResolution": "node",
     "baseUrl": "./",
     "strict": true,
-    "esModuleInterop": true,
-    "jsxImportSource": "@emotion/react" // Add this line.
+    "esModuleInterop": true
   }
 }

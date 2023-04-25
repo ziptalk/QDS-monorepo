@@ -1,4 +1,7 @@
-import { css } from "@emotion/react";
+/** @jsxImportSource @emotion/react */
+
+import React from "react";
+import { css, jsx } from "@emotion/react";
 
 const Xbutton = ({ ...props }: React.ComponentProps<"button">) => {
   return <button css={buttonStyle} {...props} />;

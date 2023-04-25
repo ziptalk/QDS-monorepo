@@ -1,4 +1,5 @@
 import * as _emotion_react_jsx_runtime from '@emotion/react/jsx-runtime';
+import React from 'react';
 import { SerializedStyles } from '@emotion/react';
 
 interface Props extends React.ComponentProps<"div"> {

@@ -1,14 +1,16 @@
+/** @jsxImportSource @emotion/react */
+
+import React, { useRef } from "react";
 import FixedBackground, {
   modalBackgroundStyle,
   modalBackgroundAnimation,
 } from "../Common/FixedBackground";
-import { css, keyframes, SerializedStyles } from "@emotion/react";
+import { css, keyframes, SerializedStyles, jsx } from "@emotion/react";
 import ReactPortal from "../Common/Portal";
 import { useOutsideClose } from "../Common/useOutsideClose";
-import { useRef } from "react";
 import Xbutton from "./Xbutton";
 
-interface Props extends React.ComponentProps<"div"> {
+export interface Props extends React.ComponentProps<"div"> {
   children: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
