@@ -20,6 +20,16 @@ interface Props extends React.ComponentProps<"div"> {
   overlayStyle?: SerializedStyles;
 }
 
+/**
+ * React Modal Component by Portal
+ * @param children Inner Content (innevitable)
+ * @param isOpen Is the modal open (innevitable)
+ * @param ratio The height of Sheet _  (innevitable)
+ * @param onClose Event handler when closing modal (innevitable)
+ * @param xButton Existence of the x-button
+ * @param overlayStyle Custom Style with Modal Background
+ * @returns
+ */
 const BottomSheet = ({
   children,
   isOpen,
