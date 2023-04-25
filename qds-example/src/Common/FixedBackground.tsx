@@ -33,6 +33,12 @@ export const modalBackgroundStyle = css`
   justify-content: center;
 `;
 
+export const sheetBackgroundStyle = css`
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+`;
+
 export const modalBackgroundAnimation = keyframes`
     from{
       opacity:0;
@@ -40,6 +46,28 @@ export const modalBackgroundAnimation = keyframes`
     to{
       opacity:1;
     }
+`;
+
+export const sheetBackgroundOpen = keyframes`
+    from{
+      opacity:0;
+      top:20px;
+    }
+    to{
+      opacity:1;
+      top: 0px;
+    }
+`;
+
+export const sheetBackgroundClose = keyframes`
+  from{
+    opacity:1;
+    top:0px;
+  }
+  to{
+    opacity:0;
+    top: 20px;
+  } 
 `;
 
 export default FixedBackground;

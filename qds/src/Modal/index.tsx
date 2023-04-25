@@ -8,7 +8,7 @@ import FixedBackground, {
 import { css, keyframes, SerializedStyles, jsx } from "@emotion/react";
 import ReactPortal from "../Common/Portal";
 import { useOutsideClose } from "../Common/useOutsideClose";
-import Xbutton from "./Xbutton";
+import Xbutton from "../Common/Xbutton";
 
 export interface Props extends React.ComponentProps<"div"> {
   children: React.ReactNode;

@@ -1,9 +1,9 @@
 import * as _emotion_react_jsx_runtime from '@emotion/react/jsx-runtime';
-import React from 'react';
+import React$1 from 'react';
 import { SerializedStyles } from '@emotion/react';
 
-interface Props extends React.ComponentProps<"div"> {
-    children: React.ReactNode;
+interface Props$1 extends React$1.ComponentProps<"div"> {
+    children: React$1.ReactNode;
     isOpen: boolean;
     onClose: () => void;
     xButton?: boolean;
@@ -18,6 +18,16 @@ interface Props extends React.ComponentProps<"div"> {
  * @param overlayStyle Custom Style with Modal Background
  * @returns
  */
-declare const Modal: ({ children, isOpen, onClose, xButton, overlayStyle, ...props }: Props) => _emotion_react_jsx_runtime.JSX.Element;
+declare const Modal: ({ children, isOpen, onClose, xButton, overlayStyle, ...props }: Props$1) => _emotion_react_jsx_runtime.JSX.Element;
 
-export { Modal };
+interface Props extends React.ComponentProps<"div"> {
+    children: React.ReactNode;
+    isOpen: boolean;
+    ratio: number;
+    onClose: () => void;
+    xButton?: boolean;
+    overlayStyle?: SerializedStyles;
+}
+declare const BottomSheet: ({ children, isOpen, ratio, onClose, xButton, overlayStyle, ...props }: Props) => _emotion_react_jsx_runtime.JSX.Element;
+
+export { BottomSheet, Modal };

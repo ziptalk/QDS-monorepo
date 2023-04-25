@@ -8,7 +8,7 @@ import { css, keyframes, SerializedStyles } from "@emotion/react";
 import ReactPortal from "../Common/Portal";
 import { useOutsideClose } from "../Common/useOutsideClose";
 import { useRef } from "react";
-import Xbutton from "./Xbutton";
+import Xbutton from "../Common/Xbutton";
 
 interface Props extends React.ComponentProps<"div"> {
   children: React.ReactNode;

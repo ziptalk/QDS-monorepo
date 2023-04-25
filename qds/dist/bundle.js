@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useLayoutEffect, forwardRef, useContext, createElement, Fragment as Fragment$1, createContext, useRef, useState, useEffect } from 'react';
+import { useLayoutEffect, forwardRef, useContext, createElement, Fragment as Fragment$1, createContext, useRef, useState, useEffect, useCallback } from 'react';
 import { Fragment as Fragment$2, jsx as jsx$1, jsxs as jsxs$1 } from 'react/jsx-runtime';
 import { createPortal } from 'react-dom';
 
@@ -2614,10 +2614,13 @@ var FixedBackground = function FixedBackground(_a) {
     children: children
   }));
 };
-var backgroundStyle = css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: 100vw;\n  height: 100vh;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  background-color: #0000005a;\n"], ["\n  width: 100vw;\n  height: 100vh;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  background-color: #0000005a;\n"])));
-var modalBackgroundStyle = css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"])));
-var modalBackgroundAnimation = keyframes(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n    from{\n      opacity:0;\n    }\n    to{\n      opacity:1;\n    }\n"], ["\n    from{\n      opacity:0;\n    }\n    to{\n      opacity:1;\n    }\n"])));
-var templateObject_1$2, templateObject_2$1, templateObject_3$1;
+var backgroundStyle = css(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  width: 100vw;\n  height: 100vh;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  background-color: #0000005a;\n"], ["\n  width: 100vw;\n  height: 100vh;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  background-color: #0000005a;\n"])));
+var modalBackgroundStyle = css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"])));
+var sheetBackgroundStyle = css(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  display: flex;\n  align-items: flex-end;\n  justify-content: center;\n"], ["\n  display: flex;\n  align-items: flex-end;\n  justify-content: center;\n"])));
+var modalBackgroundAnimation = keyframes(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n    from{\n      opacity:0;\n    }\n    to{\n      opacity:1;\n    }\n"], ["\n    from{\n      opacity:0;\n    }\n    to{\n      opacity:1;\n    }\n"])));
+var sheetBackgroundOpen = keyframes(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n    from{\n      opacity:0;\n      top:20px;\n    }\n    to{\n      opacity:1;\n      top: 0px;\n    }\n"], ["\n    from{\n      opacity:0;\n      top:20px;\n    }\n    to{\n      opacity:1;\n      top: 0px;\n    }\n"])));
+var sheetBackgroundClose = keyframes(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  from{\n    opacity:1;\n    top:0px;\n  }\n  to{\n    opacity:0;\n    top: 20px;\n  } \n"], ["\n  from{\n    opacity:1;\n    top:0px;\n  }\n  to{\n    opacity:0;\n    top: 20px;\n  } \n"])));
+var templateObject_1$3, templateObject_2$2, templateObject_3$2, templateObject_4$2, templateObject_5$1, templateObject_6$1;
 
 function createWrapperAndAppendToBody(wrapperId) {
   if (document.getElementById(wrapperId)) return document.getElementById(wrapperId);else {
@@ -2669,8 +2672,8 @@ var Xbutton = function Xbutton(_a) {
     css: buttonStyle
   }, props));
 };
-var buttonStyle = css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  overflow: hidden;\n  position: relative;\n  border: none;\n  padding: 0;\n  width: 26px;\n  height: 26px;\n  border-radius: 50%;\n  background: transparent;\n  color: #6a6a6a;\n  font: inherit;\n  text-indent: 100%;\n  cursor: pointer;\n  transition: all 0.15s;\n\n  &:hover {\n    background: rgba(119, 119, 119, 0.1);\n  }\n\n  &:before,\n  &:after {\n    position: absolute;\n    top: 15%;\n    left: calc(50% - 0.0625em);\n    width: 0.125em;\n    height: 70%;\n    border-radius: 0.125em;\n    transform: rotate(45deg);\n    background: currentcolor;\n    content: \"\";\n  }\n\n  &:after {\n    transform: rotate(-45deg);\n  }\n"], ["\n  overflow: hidden;\n  position: relative;\n  border: none;\n  padding: 0;\n  width: 26px;\n  height: 26px;\n  border-radius: 50%;\n  background: transparent;\n  color: #6a6a6a;\n  font: inherit;\n  text-indent: 100%;\n  cursor: pointer;\n  transition: all 0.15s;\n\n  &:hover {\n    background: rgba(119, 119, 119, 0.1);\n  }\n\n  &:before,\n  &:after {\n    position: absolute;\n    top: 15%;\n    left: calc(50% - 0.0625em);\n    width: 0.125em;\n    height: 70%;\n    border-radius: 0.125em;\n    transform: rotate(45deg);\n    background: currentcolor;\n    content: \"\";\n  }\n\n  &:after {\n    transform: rotate(-45deg);\n  }\n"])));
-var templateObject_1$1;
+var buttonStyle = css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  overflow: hidden;\n  position: relative;\n  border: none;\n  padding: 0;\n  width: 26px;\n  height: 26px;\n  border-radius: 50%;\n  background: transparent;\n  color: #6a6a6a;\n  font: inherit;\n  text-indent: 100%;\n  cursor: pointer;\n  transition: all 0.15s;\n\n  &:hover {\n    background: rgba(119, 119, 119, 0.1);\n  }\n\n  &:before,\n  &:after {\n    position: absolute;\n    top: 15%;\n    left: calc(50% - 0.0625em);\n    width: 0.125em;\n    height: 70%;\n    border-radius: 0.125em;\n    transform: rotate(45deg);\n    background: currentcolor;\n    content: \"\";\n  }\n\n  &:after {\n    transform: rotate(-45deg);\n  }\n"], ["\n  overflow: hidden;\n  position: relative;\n  border: none;\n  padding: 0;\n  width: 26px;\n  height: 26px;\n  border-radius: 50%;\n  background: transparent;\n  color: #6a6a6a;\n  font: inherit;\n  text-indent: 100%;\n  cursor: pointer;\n  transition: all 0.15s;\n\n  &:hover {\n    background: rgba(119, 119, 119, 0.1);\n  }\n\n  &:before,\n  &:after {\n    position: absolute;\n    top: 15%;\n    left: calc(50% - 0.0625em);\n    width: 0.125em;\n    height: 70%;\n    border-radius: 0.125em;\n    transform: rotate(45deg);\n    background: currentcolor;\n    content: \"\";\n  }\n\n  &:after {\n    transform: rotate(-45deg);\n  }\n"])));
+var templateObject_1$2;
 
 /**
  * React Modal Component by Portal
@@ -2694,14 +2697,14 @@ var Modal = function Modal(_a) {
     wrapperId: "react-portal-modal-container"
   }, {
     children: jsx(FixedBackground, _assign({
-      css: css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "], ["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "])), modalBackgroundStyle, modalBackgroundAnimation, overlayStyle ? overlayStyle : "")
+      css: css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "], ["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "])), modalBackgroundStyle, modalBackgroundAnimation, overlayStyle ? overlayStyle : "")
     }, {
       children: jsxs("div", _assign({
         css: modalBox,
         ref: ref
       }, props, {
         children: [xButton ? jsx("span", _assign({
-          css: buttonWrapper
+          css: buttonWrapper$1
         }, {
           children: jsx(Xbutton, {
             onClick: function onClick() {
@@ -2713,10 +2716,70 @@ var Modal = function Modal(_a) {
     }))
   })) : jsx(Fragment, {});
 };
-var modalAnimation = keyframes(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    from{\n        transform:scale(0);\n    }\n    to{\n        transform:scale(1);\n    }\n"], ["\n    from{\n        transform:scale(0);\n    }\n    to{\n        transform:scale(1);\n    }\n"])));
-var modalBox = css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  border-radius: 10px;\n  background-color: white;\n  animation: ", " 0.2s ease-in-out;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,\n    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;\n  position: relative;\n"], ["\n  border-radius: 10px;\n  background-color: white;\n  animation: ", " 0.2s ease-in-out;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,\n    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;\n  position: relative;\n"])), modalAnimation);
-var buttonWrapper = css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: absolute;\n  top: 8px;\n  right: 8px;\n"], ["\n  position: absolute;\n  top: 8px;\n  right: 8px;\n"])));
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4;
+var modalAnimation = keyframes(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n    from{\n        transform:scale(0);\n    }\n    to{\n        transform:scale(1);\n    }\n"], ["\n    from{\n        transform:scale(0);\n    }\n    to{\n        transform:scale(1);\n    }\n"])));
+var modalBox = css(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  border-radius: 10px;\n  background-color: white;\n  animation: ", " 0.2s ease-in-out;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,\n    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;\n  position: relative;\n"], ["\n  border-radius: 10px;\n  background-color: white;\n  animation: ", " 0.2s ease-in-out;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,\n    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;\n  position: relative;\n"])), modalAnimation);
+var buttonWrapper$1 = css(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  position: absolute;\n  top: 8px;\n  right: 8px;\n"], ["\n  position: absolute;\n  top: 8px;\n  right: 8px;\n"])));
+var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1;
 
-export { Modal };
+var BottomSheet = function BottomSheet(_a) {
+  var children = _a.children,
+    isOpen = _a.isOpen,
+    ratio = _a.ratio,
+    onClose = _a.onClose,
+    xButton = _a.xButton,
+    overlayStyle = _a.overlayStyle,
+    props = __rest(_a, ["children", "isOpen", "ratio", "onClose", "xButton", "overlayStyle"]);
+  var _b = useState({
+      background: sheetBackgroundOpen,
+      sheet: sheetOpen
+    }),
+    animations = _b[0],
+    setAnimations = _b[1];
+  var ref = useRef(null);
+  var onCloseSheet = useCallback(function () {
+    setAnimations({
+      background: sheetBackgroundClose,
+      sheet: sheetClose
+    });
+    setTimeout(function () {
+      onClose();
+    }, 200);
+  }, []);
+  useOutsideClose(ref, onCloseSheet);
+  useEffect(function () {
+    if (!isOpen) setAnimations({
+      background: sheetBackgroundOpen,
+      sheet: sheetOpen
+    });
+  }, [isOpen]);
+  return isOpen ? jsx(ReactPortal, _assign({
+    wrapperId: "react-portal-bottom-sheet-container"
+  }, {
+    children: jsx(FixedBackground, _assign({
+      css: css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "], ["\n          ", ";\n          animation: ", " 0.2s ease-in-out;\n          ", ";\n        "])), sheetBackgroundStyle, animations.background, overlayStyle ? overlayStyle : "")
+    }, {
+      children: jsxs("div", _assign({
+        css: css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n            ", ";\n            height: ", "vh;\n            animation: ", " 0.2s ease-in-out;\n          "], ["\n            ", ";\n            height: ", "vh;\n            animation: ", " 0.2s ease-in-out;\n          "])), sheetBox, ratio, animations.sheet),
+        ref: ref
+      }, props, {
+        children: [xButton ? jsx("span", _assign({
+          css: buttonWrapper
+        }, {
+          children: jsx(Xbutton, {
+            onClick: function onClick() {
+              return onCloseSheet();
+            }
+          })
+        })) : jsx(Fragment, {}), children]
+      }))
+    }))
+  })) : jsx(Fragment, {});
+};
+var sheetOpen = keyframes(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n      from{\n          bottom: -100px;\n          opacity: 0;\n      }\n      to{\n          bottom: 0px;\n          opacity: 1;\n      }\n  "], ["\n      from{\n          bottom: -100px;\n          opacity: 0;\n      }\n      to{\n          bottom: 0px;\n          opacity: 1;\n      }\n  "])));
+var sheetClose = keyframes(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n      from{\n          bottom: 0px;\n          opacity: 1;\n      }\n      to{\n          bottom: -100px;\n          opacity: 0;\n      }\n  "], ["\n      from{\n          bottom: 0px;\n          opacity: 1;\n      }\n      to{\n          bottom: -100px;\n          opacity: 0;\n      }\n  "])));
+var sheetBox = css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  border-top-right-radius: 10px;\n  border-top-left-radius: 10px;\n  background-color: white;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,\n    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;\n  position: relative;\n"], ["\n  border-top-right-radius: 10px;\n  border-top-left-radius: 10px;\n  background-color: white;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,\n    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;\n  position: relative;\n"])));
+var buttonWrapper = css(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  position: absolute;\n  top: 8px;\n  right: 8px;\n"], ["\n  position: absolute;\n  top: 8px;\n  right: 8px;\n"])));
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
+
+export { BottomSheet, Modal };
 //# sourceMappingURL=bundle.js.map
