@@ -1,5 +1,5 @@
 import * as _emotion_react_jsx_runtime from '@emotion/react/jsx-runtime';
-import React$1 from 'react';
+import React$1, { ComponentProps } from 'react';
 import { SerializedStyles } from '@emotion/react';
 
 interface Props$1 extends React$1.ComponentProps<"div"> {
@@ -28,6 +28,21 @@ interface Props extends React.ComponentProps<"div"> {
     xButton?: boolean;
     overlayStyle?: SerializedStyles;
 }
+/**
+ * React Modal Component by Portal
+ * @param children Inner Content (innevitable)
+ * @param isOpen Is the modal open (innevitable)
+ * @param ratio The height of Sheet _  (innevitable)
+ * @param onClose Event handler when closing modal (innevitable)
+ * @param xButton Existence of the x-button
+ * @param overlayStyle Custom Style with Modal Background
+ * @returns
+ */
 declare const BottomSheet: ({ children, isOpen, ratio, onClose, xButton, overlayStyle, ...props }: Props) => _emotion_react_jsx_runtime.JSX.Element;
 
-export { BottomSheet, Modal };
+/**
+ * Skeleton UI
+ */
+declare const Skeleton: ({ ...props }: ComponentProps<"div">) => _emotion_react_jsx_runtime.JSX.Element;
+
+export { BottomSheet, Modal, Skeleton };
