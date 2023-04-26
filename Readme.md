@@ -47,24 +47,24 @@ This library is for components commonly used by Defi products.
 
 ### Modal
 
-| Prop Name      | Type             | Explanation                                                         |
-| -------------- | ---------------- | ------------------------------------------------------------------- |
-| `children`     | React.ReactNode  | The content to be displayed inside the modal.                       |
-| `isOpen`       | boolean          | Determines whether the modal is open or closed.                     |
-| `onClose`      | () => void       | Event handler function to close the modal.                          |
-| `xButton`      | boolean          | Determines whether the close button (X button) is displayed or not. |
-| `overlayStyle` | SerializedStyles | Custom CSS styles for the background overlay of the modal.          |
+| Prop Name      | Type             | Explanation                                                         | Essential |
+| -------------- | ---------------- | ------------------------------------------------------------------- | --------- |
+| `children`     | React.ReactNode  | The content to be displayed inside the modal.                       | `true`    |
+| `isOpen`       | boolean          | Determines whether the modal is open or closed.                     | `true`    |
+| `onClose`      | () => void       | Event handler function to close the modal.                          | `true`    |
+| `xButton`      | boolean          | Determines whether the close button (X button) is displayed or not. | `false`   |
+| `overlayStyle` | SerializedStyles | Custom CSS styles for the background overlay of the modal.          | `false`   |
 
 ### Bottom Sheet
 
-| Prop Name      | Type             | Explanation                                                                                     |
-| -------------- | ---------------- | ----------------------------------------------------------------------------------------------- |
-| `children`     | React.ReactNode  | The content to be displayed inside the bottom sheet.                                            |
-| `isOpen`       | boolean          | Determines whether the bottom sheet is open or closed.                                          |
-| `ratio`        | number           | The height of the bottom sheet as a percentage of the viewport height (e.g. 50 for 50% height). |
-| `onClose`      | () => void       | Event handler function to close the bottom sheet.                                               |
-| `xButton`      | boolean          | Determines whether the close button (X button) is displayed or not.                             |
-| `overlayStyle` | SerializedStyles | Custom CSS styles for the background overlay of the bottom sheet.                               |
+| Prop Name      | Type             | Explanation                                                                                     | Essential |
+| -------------- | ---------------- | ----------------------------------------------------------------------------------------------- | --------- |
+| `children`     | React.ReactNode  | The content to be displayed inside the bottom sheet.                                            | `true`    |
+| `isOpen`       | boolean          | Determines whether the bottom sheet is open or closed.                                          | `true`    |
+| `ratio`        | number           | The height of the bottom sheet as a percentage of the viewport height (e.g. 50 for 50% height). | `true`    |
+| `onClose`      | () => void       | Event handler function to close the bottom sheet.                                               | `true`    |
+| `xButton`      | boolean          | Determines whether the close button (X button) is displayed or not.                             | `false`   |
+| `overlayStyle` | SerializedStyles | Custom CSS styles for the background overlay of the bottom sheet.                               | `false`   |
 
 ### Skeleton
 
@@ -76,7 +76,7 @@ This library is for components commonly used by Defi products.
 
 MIT License
 
-Copyright (c) 2020 Mo Gorhom
+Copyright (c) 2023 Blockwavelabs
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
