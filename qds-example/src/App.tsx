@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from "react";
-import { Modal, BottomSheet, Skeleton } from "qds";
+import { Modal, BottomSheet, Skeleton } from "@qve-ui/qds";
 // import BottomSheet from "./BottomSheet";
 import { css } from "@emotion/react";
 import { ToastContainer, toast } from "react-toastify";
