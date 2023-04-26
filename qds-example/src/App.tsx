@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Modal, BottomSheet } from "qds";
-// import BottomSheet from "./BottomSheet";
+import { Modal } from "qds";
+import BottomSheet from "./BottomSheet";
 import { css } from "@emotion/react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [isModal, setIsModal] = useState(false);
   const [isSheet, setIsSheet] = useState(false);
+  const notify = () => toast("Wow so easy!");
 
   return (
     <div
@@ -16,6 +19,8 @@ function App() {
     >
       <button onClick={() => setIsModal(true)}>Open Modal</button>
       <button onClick={() => setIsSheet(true)}>Open BottomSheet</button>
+      <button onClick={notify}>Notify!</button>
+      <ToastContainer />
       <Modal isOpen={isModal} onClose={() => setIsModal(false)} xButton={true}>
         <div>
           <h1>Hello World</h1>
@@ -26,7 +31,7 @@ function App() {
         isOpen={isSheet}
         onClose={() => setIsSheet(false)}
         xButton={true}
-        ratio={100}
+        ratio={80}
       >
         <div>
           <h1>Hello World</h1>

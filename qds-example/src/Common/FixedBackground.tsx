@@ -51,22 +51,18 @@ export const modalBackgroundAnimation = keyframes`
 export const sheetBackgroundOpen = keyframes`
     from{
       opacity:0;
-      top:20px;
     }
     to{
       opacity:1;
-      top: 0px;
     }
 `;
 
 export const sheetBackgroundClose = keyframes`
   from{
     opacity:1;
-    top:0px;
   }
   to{
     opacity:0;
-    top: 20px;
   } 
 `;
 
