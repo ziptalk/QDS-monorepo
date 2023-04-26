@@ -2,6 +2,15 @@
   "name": "qds",
   "version": "1.0.0",
   "main": "./dist/bundle.js",
+  "types": "dist/bundle.d.ts",
+  "repository": "https://github.com/ziptalk/QDS-monorepo",
+  "bugs": {
+    "email": "jukyu@blockwavelabs.io"
+  },
+  "files": [
+    "/dist"
+  ],
+  "author": "Blockwavelabs",
   "license": "MIT",
   "type": "module",
   "devDependencies": {

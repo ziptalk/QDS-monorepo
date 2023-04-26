@@ -25,12 +25,6 @@ function App() {
           height: 100px;
         `}
       />
-      <Skeleton
-        css={css`
-          width: 100px;
-          height: 5000px;
-        `}
-      />
       <button onClick={() => setIsModal(true)}>Open Modal</button>
       <button onClick={() => setIsSheet(true)}>Open BottomSheet</button>
       <button onClick={notify}>Notify!</button>

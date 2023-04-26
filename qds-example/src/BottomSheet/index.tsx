@@ -2,8 +2,8 @@
 
 import FixedBackground, {
   sheetBackgroundStyle,
-  sheetBackgroundOpen,
-  sheetBackgroundClose,
+  backgroundOpen,
+  backgroundClose,
 } from "../Common/FixedBackground";
 import { css, keyframes, SerializedStyles } from "@emotion/react";
 import ReactPortal from "../Common/Portal";
@@ -30,13 +30,13 @@ const BottomSheet = ({
   ...props
 }: Props) => {
   const [animations, setAnimations] = useState({
-    background: sheetBackgroundOpen,
+    background: backgroundOpen,
     sheet: sheetOpen,
   });
   const ref = useRef<HTMLDivElement>(null);
 
   const onCloseSheet = useCallback(() => {
-    setAnimations({ background: sheetBackgroundClose, sheet: sheetClose });
+    setAnimations({ background: backgroundClose, sheet: sheetClose });
     setTimeout(() => {
       onClose();
     }, 200);
@@ -46,7 +46,7 @@ const BottomSheet = ({
 
   useEffect(() => {
     if (!isOpen)
-      setAnimations({ background: sheetBackgroundOpen, sheet: sheetOpen });
+      setAnimations({ background: backgroundOpen, sheet: sheetOpen });
   }, [isOpen]);
 
   return isOpen ? (

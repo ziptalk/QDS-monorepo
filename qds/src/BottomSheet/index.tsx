@@ -2,13 +2,13 @@
 
 import FixedBackground, {
   sheetBackgroundStyle,
-  sheetBackgroundOpen,
-  sheetBackgroundClose,
+  backgroundOpen,
+  backgroundClose,
 } from "../Common/FixedBackground";
 import { css, keyframes, SerializedStyles } from "@emotion/react";
 import ReactPortal from "../Common/Portal";
 import { useOutsideClose } from "../Common/useOutsideClose";
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Xbutton from "../Common/Xbutton";
 
 interface Props extends React.ComponentProps<"div"> {
@@ -20,16 +20,6 @@ interface Props extends React.ComponentProps<"div"> {
   overlayStyle?: SerializedStyles;
 }
 
-/**
- * React Modal Component by Portal
- * @param children Inner Content (innevitable)
- * @param isOpen Is the modal open (innevitable)
- * @param ratio The height of Sheet _  (innevitable)
- * @param onClose Event handler when closing modal (innevitable)
- * @param xButton Existence of the x-button
- * @param overlayStyle Custom Style with Modal Background
- * @returns
- */
 const BottomSheet = ({
   children,
   isOpen,
@@ -40,13 +30,13 @@ const BottomSheet = ({
   ...props
 }: Props) => {
   const [animations, setAnimations] = useState({
-    background: sheetBackgroundOpen,
+    background: backgroundOpen,
     sheet: sheetOpen,
   });
   const ref = useRef<HTMLDivElement>(null);
 
   const onCloseSheet = useCallback(() => {
-    setAnimations({ background: sheetBackgroundClose, sheet: sheetClose });
+    setAnimations({ background: backgroundClose, sheet: sheetClose });
     setTimeout(() => {
       onClose();
     }, 200);
@@ -56,7 +46,7 @@ const BottomSheet = ({
 
   useEffect(() => {
     if (!isOpen)
-      setAnimations({ background: sheetBackgroundOpen, sheet: sheetOpen });
+      setAnimations({ background: backgroundOpen, sheet: sheetOpen });
   }, [isOpen]);
 
   return isOpen ? (
@@ -64,7 +54,7 @@ const BottomSheet = ({
       <FixedBackground
         css={css`
           ${sheetBackgroundStyle};
-          animation: ${animations.background} 0.3s ease-in-out;
+          animation: ${animations.background} 0.2s ease-in-out;
           ${overlayStyle ? overlayStyle : ""};
         `}
       >
@@ -72,7 +62,7 @@ const BottomSheet = ({
           css={css`
             ${sheetBox};
             height: ${ratio}vh;
-            animation: ${animations.sheet} 0.3s ease-in-out;
+            animation: ${animations.sheet} 0.2s ease-in-out;
           `}
           ref={ref}
           {...props}
@@ -94,26 +84,26 @@ const BottomSheet = ({
 };
 
 const sheetOpen = keyframes`
-      from{
-          bottom: -50px;
-          opacity: 0;
-      }
-      to{
-          bottom: 0px;
-          opacity: 1;
-      }
-  `;
+    from{
+        bottom: -100px;
+        opacity: 0;
+    }
+    to{
+        bottom: 0px;
+        opacity: 1;
+    }
+`;
 
 const sheetClose = keyframes`
-      from{
-          bottom: 0px;
-          opacity: 1;
-      }
-      to{
-          bottom: -50px;
-          opacity: 0;
-      }
-  `;
+    from{
+        bottom: 0px;
+        opacity: 1;
+    }
+    to{
+        bottom: -100px;
+        opacity: 0;
+    }
+`;
 
 const sheetBox = css`
   border-top-right-radius: 10px;
