@@ -1,9 +1,12 @@
+/** @jsxImportSource @emotion/react */
+
 import React, { useState } from "react";
-import { Modal } from "qds";
-import BottomSheet from "./BottomSheet";
+import { Modal, BottomSheet } from "qds";
+// import BottomSheet from "./BottomSheet";
 import { css } from "@emotion/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Skeleton from "./Skeleton";
 
 function App() {
   const [isModal, setIsModal] = useState(false);
@@ -17,6 +20,18 @@ function App() {
         flex-direction: column;
       `}
     >
+      <Skeleton
+        css={css`
+          width: 100px;
+          height: 100px;
+        `}
+      />
+      <Skeleton
+        css={css`
+          width: 100px;
+          height: 100px;
+        `}
+      />
       <button onClick={() => setIsModal(true)}>Open Modal</button>
       <button onClick={() => setIsSheet(true)}>Open BottomSheet</button>
       <button onClick={notify}>Notify!</button>
@@ -31,7 +46,7 @@ function App() {
         isOpen={isSheet}
         onClose={() => setIsSheet(false)}
         xButton={true}
-        ratio={80}
+        ratio={60}
       >
         <div>
           <h1>Hello World</h1>
