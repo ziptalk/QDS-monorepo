@@ -18,6 +18,7 @@ interface Props extends React.ComponentProps<"div"> {
   xButton?: boolean;
   overlayStyle?: SerializedStyles;
   xStyle?: SerializedStyles;
+  customX?: React.ReactNode;
 }
 
 /**
@@ -28,6 +29,8 @@ interface Props extends React.ComponentProps<"div"> {
  * @param xButton Existence of the x-button
  * @param overlayStyle Custom Style with Modal Background
  * @param xStyle Custom Style with x-button
+ * @param customX Your cuuston X Button
+ * @param ...props ComponentProps<"div">
  * @returns
  */
 const Modal = ({
@@ -37,6 +40,7 @@ const Modal = ({
   xButton,
   overlayStyle,
   xStyle,
+  customX,
   ...props
 }: Props) => {
   const [animations, setAnimations] = useState({
@@ -70,15 +74,19 @@ const Modal = ({
       >
         <div css={modalBox} ref={ref} {...props}>
           {xButton ? (
-            <span
-              css={css`
-                ${buttonWrapper};
-                animation: ${animations.modal} 0.2s ease-in-out;
-                ${xStyle ? xStyle : ""}
-              `}
-            >
-              <Xbutton onClick={() => onClose()} />
-            </span>
+            customX ? (
+              customX
+            ) : (
+              <span
+                css={css`
+                  ${buttonWrapper};
+                  animation: ${animations.modal} 0.2s ease-in-out;
+                  ${xStyle ? xStyle : ""}
+                `}
+              >
+                <Xbutton onClick={() => onClose()} />
+              </span>
+            )
           ) : (
             <></>
           )}

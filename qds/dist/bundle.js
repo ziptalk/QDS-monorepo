@@ -2698,6 +2698,8 @@ var templateObject_1$3;
  * @param xButton Existence of the x-button
  * @param overlayStyle Custom Style with Modal Background
  * @param xStyle Custom Style with x-button
+ * @param customX Your cuuston X Button
+ * @param ...props ComponentProps<"div">
  * @returns
  */
 var Modal = function Modal(_a) {
@@ -2707,7 +2709,8 @@ var Modal = function Modal(_a) {
     xButton = _a.xButton,
     overlayStyle = _a.overlayStyle,
     xStyle = _a.xStyle,
-    props = __rest(_a, ["children", "isOpen", "onClose", "xButton", "overlayStyle", "xStyle"]);
+    customX = _a.customX,
+    props = __rest(_a, ["children", "isOpen", "onClose", "xButton", "overlayStyle", "xStyle", "customX"]);
   var _b = useState({
       background: backgroundOpen,
       modal: modalOpen
@@ -2741,8 +2744,8 @@ var Modal = function Modal(_a) {
         css: modalBox,
         ref: ref
       }, props, {
-        children: [xButton ? jsx("span", _assign({
-          css: css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n                ", ";\n                animation: ", " 0.2s ease-in-out;\n                ", "\n              "], ["\n                ", ";\n                animation: ", " 0.2s ease-in-out;\n                ", "\n              "])), buttonWrapper$1, animations.modal, xStyle ? xStyle : "")
+        children: [xButton ? customX ? customX : jsx("span", _assign({
+          css: css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n                  ", ";\n                  animation: ", " 0.2s ease-in-out;\n                  ", "\n                "], ["\n                  ", ";\n                  animation: ", " 0.2s ease-in-out;\n                  ", "\n                "])), buttonWrapper$1, animations.modal, xStyle ? xStyle : "")
         }, {
           children: jsx(Xbutton, {
             onClick: function onClick() {

@@ -47,13 +47,16 @@ This library is for components commonly used by Defi products.
 
 ### Modal
 
-| Prop Name      | Type             | Explanation                                                         | Essential |
-| -------------- | ---------------- | ------------------------------------------------------------------- | --------- |
-| `children`     | React.ReactNode  | The content to be displayed inside the modal.                       | `true`    |
-| `isOpen`       | boolean          | Determines whether the modal is open or closed.                     | `true`    |
-| `onClose`      | () => void       | Event handler function to close the modal.                          | `true`    |
-| `xButton`      | boolean          | Determines whether the close button (X button) is displayed or not. | `false`   |
-| `overlayStyle` | SerializedStyles | Custom CSS styles for the background overlay of the modal.          | `false`   |
+| Prop Name      | Type                  | Explanation                                                         | Essential |
+| -------------- | --------------------- | ------------------------------------------------------------------- | --------- |
+| `children`     | React.ReactNode       | The content to be displayed inside the modal.                       | `true`    |
+| `isOpen`       | boolean               | Determines whether the modal is open or closed.                     | `true`    |
+| `onClose`      | () => void            | Event handler function to close the modal.                          | `true`    |
+| `xButton`      | boolean               | Determines whether the close button (X button) is displayed or not. | `false`   |
+| `overlayStyle` | SerializedStyles      | Custom CSS styles for the background overlay of the modal.          | `false`   |
+| `xStyle`       | SerializedStyles      | Custom CSS styles for the xButton                                   | `false`   |
+| `customX`      | React.ReactNode       | Your custom x-button                                                | `false`   |
+| `...props`     | ComponentProps<"div"> | Modal Box Props (ComponentProps)                                    | `false`   |
 
 ### Bottom Sheet
 

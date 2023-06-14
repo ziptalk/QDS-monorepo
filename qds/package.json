@@ -1,6 +1,6 @@
 {
   "name": "@qve-ui/qds",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "main": "./dist/bundle.js",
   "types": "dist/bundle.d.ts",
   "repository": "https://github.com/ziptalk/QDS-monorepo",
