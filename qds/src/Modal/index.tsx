@@ -17,6 +17,7 @@ interface Props extends React.ComponentProps<"div"> {
   onClose: () => void;
   xButton?: boolean;
   overlayStyle?: SerializedStyles;
+  xStyle?: SerializedStyles;
 }
 
 /**
@@ -26,6 +27,7 @@ interface Props extends React.ComponentProps<"div"> {
  * @param onClose Event handler when closing modal (innevitable)
  * @param xButton Existence of the x-button
  * @param overlayStyle Custom Style with Modal Background
+ * @param xStyle Custom Style with x-button
  * @returns
  */
 const Modal = ({
@@ -34,6 +36,7 @@ const Modal = ({
   onClose,
   xButton,
   overlayStyle,
+  xStyle,
   ...props
 }: Props) => {
   const [animations, setAnimations] = useState({
@@ -71,6 +74,7 @@ const Modal = ({
               css={css`
                 ${buttonWrapper};
                 animation: ${animations.modal} 0.2s ease-in-out;
+                ${xStyle ? xStyle : ""}
               `}
             >
               <Xbutton onClick={() => onClose()} />

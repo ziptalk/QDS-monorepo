@@ -8,6 +8,7 @@ interface Props$1 extends React.ComponentProps<"div"> {
     onClose: () => void;
     xButton?: boolean;
     overlayStyle?: SerializedStyles;
+    xStyle?: SerializedStyles;
 }
 /**
  * React Modal Component by Portal
@@ -16,9 +17,10 @@ interface Props$1 extends React.ComponentProps<"div"> {
  * @param onClose Event handler when closing modal (innevitable)
  * @param xButton Existence of the x-button
  * @param overlayStyle Custom Style with Modal Background
+ * @param xStyle Custom Style with x-button
  * @returns
  */
-declare const Modal: ({ children, isOpen, onClose, xButton, overlayStyle, ...props }: Props$1) => _emotion_react_jsx_runtime.JSX.Element;
+declare const Modal: ({ children, isOpen, onClose, xButton, overlayStyle, xStyle, ...props }: Props$1) => _emotion_react_jsx_runtime.JSX.Element;
 
 interface Props extends React.ComponentProps<"div"> {
     children: React.ReactNode;
